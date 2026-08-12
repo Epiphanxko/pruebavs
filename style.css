@@ -1,0 +1,42 @@
+* { 
+    box-sizing: border-box; 
+}body{
+    background-color:#9476a3;
+    color: wheat;
+}
+
+header{
+    border: cornsilk 2px solid;
+    padding-inline-start: 10px;
+    margin: 120px;
+    border-radius: 9em;
+}
+
+nav {
+    border: cornflowerblue 2px solid;
+}
+
+main{
+    border: palevioletred 2px solid;
+} 
+
+footer{
+    border: rosybrown 2px solid;
+}
+@media only screen and (max width 600px){
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+} 
+ul{
+    display: flex;
+    float: left;
+    
+}
+li{
+    text-decoration: none;
+}
+ul li a{
+    background-color: blue;
+}
