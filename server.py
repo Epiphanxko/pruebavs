@@ -1,24 +1,88 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request,flash, redirect
+from flask_wtf import FlaskForm
+from wtforms import StringField, DateField, PasswordField, SubmitField,BooleanField
+from wtforms.validators import Email, Length, EqualTo, DataRequired,InputRequired
 
-#variables globales
-app= Flask(__name__) #Creación del entorno Flask
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from config_server import Config
+from flask_mysqldb import MySQL
+
+
+app= Flask(__name__) 
+
+app.config.from_object(Config)
+
+app.secret_key = "floreria123"
+
+
+database = MySQL(app)
+
+
+app.config ["APP_KEY"] = "bjfMtWIzihMt5nqHNYW85CxjMNpyQcIY5tu-sck_z6LSYv803MqTyfGuZrVGr_s_4h0yBoGYbbbJ7_LLVfcFHA"
 
 #rutas
-@app.route("/") #La ruta raíz del servidor
-def index(): #inicia la función
-    return(render_template('index.html')) #y toma una plantilla de la carpeta templates para renderizarla
+@app.route("/") 
+def index(): 
+    flash ("Bienvenido","alerta")
+    return(render_template("index.html")) 
 
-#Esto se ecribe con el snippet froute
-@app.route('/formulario', methods = ['GET', 'POST']) #este es un cambio en la URL y methods es una foma en que transmite los datos de form
+class Registro(FlaskForm):
+    rNombre = StringField("Nombre", validators=[Length(min=3, max=50, message="Ingresa un nombre valido")])
+    rApellido = StringField("Apellidos",validators=[InputRequired(), Length(min=1,max=150)])
+    rCorreo =StringField("Correo",validators = [InputRequired(),Email()])
+    rPass = PasswordField("Contraseña", validators=(DataRequired(),Length(min=8,message="DEBE TENER AL MENOS 8 CARACTERES")))
+    rsubmit = SubmitField("Registrarme")
+    rConfirm = PasswordField("Confirmar contraseña", validators=[])
+    rTYC= BooleanField ("Aceptar Terminas y COndiciones", validators=[DataRequired()])
+
+
+@app.route('/formulario', methods = ['GET', 'POST'])
 def registro():
-    return render_template('formulario.html')
+    
+    form = Registro ()
+
+    if form.validate_on_submit():
+       inNombre = form.rNombre.data
+       inApellidos =form.rApellido.data
+       inCorreo =form.rCorreo.data
+       inPass=form.rPass.data
+       inConfirm =form.rConfirm.data
+       inTYC =form.rTYC.data
+       
+       values = f"Nombre: {inNombre} Apellidos: {inApellidos} Correo: {inCorreo} Contraseña:{inPass} Confirmar: {inConfirm} TyC: {inTYC}" 
+       print(values)
+       
+       if inPass == inConfirm and inTYC != False:
+            password_hasheada= generate_password_hash(inPass)
+
+            sqlCrearUsuario = "INSERT INTO usuarios(id_usuario,name_user,email_user) VALUES (%s,%s,%s)"
+
+            crearUsuario = database.connect.cursor()
+            crearUsuario.execute(sqlCrearUsuario,(inNombre,inCorreo,password_hasheada))
+            database.connection.commit() 
+            crearUsuario.close()
+
+            flash("Cuenta creada", "succes")
+
+            return redirect("login")
+
+    return render_template('formulario.html', form=form)
 
 @app.route('/login', methods =['GET', 'POST'])
-def login(): #hay que quitar el foo de aqui pq si no no jala :)
-    return render_template('login.html')
+def login(): 
+    msj= None
+
+    if request.method == 'POST':
+        lUser =request.form.get("lUser")
+        lPass =request.form.get(lPass)
+
+        msj = f"NOMBRE: {lUser},CONTRASEÑA: {lPass}"
+
+        return render_template('login.html',msj =msj)
+
+    return render_template('login.html',msj =msj)
 
 
-if "_main" == __name__: #Cuando se ejecute el servidor,
-    app.run(host="0.0.0.0", port=8088, debug=True) #que lo haga por el puerto 8088, con la ip que se tenga en ese momento en modo depuración
-
-#En consola se debe usar el comando flask --app server run --debug (dbug crea el modo depurador para guardar los cambios en tiempo real)
+if "__main__"== __name__: 
+    app.run(host="0.0.0.0", port=8088, debug=True) 

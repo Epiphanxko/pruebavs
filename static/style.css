@@ -1,0 +1,120 @@
+* { 
+    box-sizing: border-box; 
+}body{
+    background-color:#b174cf;
+    color: rgb(179, 77, 172);
+}
+
+header{
+    border: rgb(227, 207, 125) 2px solid;
+    padding-inline-start: 10px;
+    margin: 120px;
+    border-radius: 9em;
+}
+
+nav {
+    border: cornflowerblue 2px solid;
+}
+
+main{
+    border: palevioletred 2px solid;
+} 
+
+footer{
+    border: rgb(246, 221, 158) 2px solid;
+}
+@media only screen and (max width 600px){}
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+ 
+ul{
+    display: flex;
+    float: left;
+    
+}
+li{
+    text-decoration: none;
+}
+ul li a{
+    background-color: blue;
+}
+/* Diseño del formulario */
+
+.contenedor-formulario {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-formulario h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.contenedor-formulario .form-control {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.contenedor-formulario .form-control:focus {
+    border-color: #b174cf;
+    box-shadow: 0 0 0 0.2rem rgba(177, 116, 207, 0.25);
+}
+
+.contenedor-formulario .btn {
+    border-radius: 10px;
+}
+
+#rsubmit {
+    background-color: #b174cf;
+    border-color: #b174cf;
+}
+
+#rsubmit:hover {
+    background-color: #9655b5;
+    border-color: #9655b5;
+}
+/* Diseño del formulario */
+
+.contenedor-formulario {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contenedor-formulario h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.contenedor-formulario .form-control {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.contenedor-formulario .form-control:focus {
+    border-color: #b174cf;
+    box-shadow: 0 0 0 0.2rem rgba(177, 116, 207, 0.25);
+}
+
+.contenedor-formulario .btn {
+    border-radius: 10px;
+}
+
+#rsubmit {
+    background-color: #b174cf;
+    border-color: #b174cf;
+}
+
+#rsubmit:hover {
+    background-color: #9655b5;
+    border-color: #9655b5;
+}

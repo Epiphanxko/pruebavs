@@ -1,0 +1,29 @@
+{%block main%}
+
+<form action="/login" method="POST" class="container mt-5">
+
+    <h2 class="text-center mb-4">Iniciar sesión</h2>
+
+    <div class="mb-3">
+        <input type="text" name="lUser" class="form-control"
+        placeholder="Nombre de usuario">
+    </div>
+
+    <div class="mb-3">
+        <input type="password" name="lPass" class="form-control"
+        placeholder="Contraseña">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        Iniciar sesión
+    </button>
+
+    {% if msj %}
+        <div class="alert alert-success mt-3">
+            {{ msj }}
+        </div>
+    {% endif %}
+
+</form>
+
+{%endblock%}
