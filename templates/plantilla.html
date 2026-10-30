@@ -1,85 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/Style.css" type="text/css">
-    
-    <title>APP
-      {% block titulo %}
-      {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block titulo %}
+        {% endblock %}
     </title>
 </head>
+
 <body>
 
-    <section id="nosotros" class="container py-5">
-    <h2>Nosotros</h2>
-    <p>Información sobre nosotros.</p>
-</section>
 
-<section id="servicios" class="container py-5">
-    <h2>Servicios</h2>
-    <p>Aquí van los servicios.</p>
-</section>
-
-<section id="contacto" class="container py-5">
-    <h2>Contacto</h2>
-    <p>Información de contacto.</p>
-</section>
-
-
-<!-- JavaScript de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <header>
         <i class="fa-solid fa-folder--open"></i>
-        <h1>{% block cabecera %}    
-        {% endblock%}</h1>
+        <h1>{% block cabecera %}
+               HOLAAAAAAAAAAAAAAAAAAAA
+            {% endblock%}</h1>
     </header>
-    
+
     <nav>
-        <div id ="flashes">
-          {% with messages= get_flashed_messages(with_categories = true) %}
-             {%if messages%}
-                {%for category, message in messages%}
-                <div class="alert alert-{{category}} alert-dismissible fade show"role="alert">
-                    {{message}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <div id="flashes">
+            {% with messages= get_flashed_messages(with_categories = true) %}
+            {%if messages%}
+            {%for category, message in messages%}
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hiden="true">&times;</span>
-                    </button>
-                </div>
-                 {%endfor%}
-             {%endif%}
-          {% endwith%}
+                </button>
+            </div>
+            {%endfor%}
+            {%endif%}
+            {% endwith%}
         </div>
-    <ul>
-        <li>
-               <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/formulario">formulario</a>
-        </li>
-        <li>
-            <a href="/login">login</a>
-        </li>    
-        <li>
-            <a href="/about">acercade</a>
-        </li>
-    </ul>
-    <p>FLORERIA ruxtedo, en esta floreria encontaras las mejores flores para todo tu rosal
-    </p>
+        <ul>
+            
+            <li>
+                <a href="{{url_for()    }}">Home</a>
+            </li>
+            <li>
+                <a href="/formulario">INICIAR SECION</a>
+            </li>
+            <li>
+                <a href="/login">CREAR CUENTA</a>
+            </li>
+            <li>
+                <a href="/acercade">MUESTRARIO</a>
+            </li>
+            <li>
+                <a href="/perfil">PERFIL</a>
+            </li>
+        </ul>
+        <p>
+        </p>
     </nav>
     <main>
-    {% block main %} 
-    
-    {% endblock %}
+        {% block main %}
+
+        <section id="MUESTRARIO" class="container py-5">
+            <h2>MUESTRARIO</h2>
+            <p>Todo nuestro catalogo</p>
+        </section>
+
+        <section id="SERVICIOS" class="container py-5">
+            <h2>Servicios</h2>
+            <p>Aquí vas a encontrar los servicios.</p>
+        </section>
+
+        <section id="PERSONALISAR" class="container py-5">
+            <h2>Personalisar</h2>
+            <p>Personalisa tu propio arreglo</p>
+        </section>
+
+
+        {% endblock %}
     </main>
 
     <footer>
-    {% block pie %}
+        {% block pie %}
 
-    {% endblock %}
+        {% endblock %}
     </footer>
+</body>
+
 </html>

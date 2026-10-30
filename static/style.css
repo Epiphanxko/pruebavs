@@ -1,19 +1,58 @@
-* { 
+ *{ 
     box-sizing: border-box; 
-}body{
-    background-color:#b174cf;
-    color: rgb(179, 77, 172);
+ }
+body{
+    background-color:#EADFC6;
+    color: rgb(50, 28, 48);
+
+}fonts {
+  font-family: "Times New Roman", Times, serif;
+}header{
+    border: #91303F 5px solid;
+    padding-inline-start: 700px;
+    margin: 70px;
+    border-radius: 5em;
 }
 
-header{
-    border: rgb(227, 207, 125) 2px solid;
-    padding-inline-start: 10px;
-    margin: 120px;
-    border-radius: 9em;
+#catalogo{
+    display:flex ;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+
 }
+
+.catalogo{
+    display:flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+}
+
+.producto{
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    border-radius: 15px;
+    gap: 10px;
+    margin: .5em;
+    color: black;
+    padding: .5em;
+
+
+}
+
+.producto img{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+
 
 nav {
-    border: cornflowerblue 2px solid;
+    border: rgb(26, 101, 31) 2px solid;
 }
 
 main{
@@ -23,7 +62,8 @@ main{
 footer{
     border: rgb(246, 221, 158) 2px solid;
 }
-@media only screen and (max width 600px){}
+
+ @media only screen and (max-width: 600px){}
     body {
         display: flex;
         flex-direction: column;
@@ -38,7 +78,7 @@ li{
     text-decoration: none;
 }
 ul li a{
-    background-color: blue;
+    background-color: rgb(224, 220, 106);
 }
 /* Diseño del formulario */
 
@@ -46,46 +86,7 @@ ul li a{
     max-width: 600px;
     margin: 40px auto;
     padding: 30px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-}
-
-.contenedor-formulario h2 {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.contenedor-formulario .form-control {
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.contenedor-formulario .form-control:focus {
-    border-color: #b174cf;
-    box-shadow: 0 0 0 0.2rem rgba(177, 116, 207, 0.25);
-}
-
-.contenedor-formulario .btn {
-    border-radius: 10px;
-}
-
-#rsubmit {
-    background-color: #b174cf;
-    border-color: #b174cf;
-}
-
-#rsubmit:hover {
-    background-color: #9655b5;
-    border-color: #9655b5;
-}
-/* Diseño del formulario */
-
-.contenedor-formulario {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: white;
+    background-color: rgb(104, 20, 20);
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
 }

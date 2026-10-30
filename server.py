@@ -19,7 +19,8 @@ app.secret_key = "floreria123"
 database = MySQL(app)
 
 
-app.config ["APP_KEY"] = "bjfMtWIzihMt5nqHNYW85CxjMNpyQcIY5tu-sck_z6LSYv803MqTyfGuZrVGr_s_4h0yBoGYbbbJ7_LLVfcFHA"
+
+
 
 #rutas
 @app.route("/") 
@@ -58,7 +59,7 @@ def registro():
 
             sqlCrearUsuario = "INSERT INTO usuarios(id_usuario,name_user,email_user) VALUES (%s,%s,%s)"
 
-            crearUsuario = database.connect.cursor()
+            crearUsuario = database.connection.cursor()
             crearUsuario.execute(sqlCrearUsuario,(inNombre,inCorreo,password_hasheada))
             database.connection.commit() 
             crearUsuario.close()
@@ -75,13 +76,56 @@ def login():
 
     if request.method == 'POST':
         lUser =request.form.get("lUser")
-        lPass =request.form.get(lPass)
+        lPass =request.form.get("lPass")
 
-        msj = f"NOMBRE: {lUser},CONTRASEÑA: {lPass}"
+        msj = f"NOMBRE: {lUser},CONTRASEÑA: {"lPass"}"
 
         return render_template('login.html',msj =msj)
 
     return render_template('login.html',msj =msj)
+
+@app.route('/perfil')
+def perfil():
+    consulta_perfil = database.connection.cursor()
+
+    sqlConsulta = "SELECT * FROM usuarios"
+
+    consulta_perfil.execute(sqlConsulta)
+    
+    datos = consulta_perfil.fetchall()
+
+    usuarios =[]
+
+    if datos:
+        for campo in datos:
+            usuarios.append({
+                    "uid": campo[0],
+                    "uname": campo[1],
+                    "uemail": campo[2],
+                    "upass": "CONTRASEÑA"
+                })
+            
+    else:
+        usuarios = None
+
+
+    return render_template('perfil.html', usuarios=usuarios)
+
+#CATALOGO
+
+@app.route('/catalogo', methods=['POST'])
+def catalogo():
+    consulta_producto = database.connection.cursor()
+    sqlCOnsulta = "SELECT pnombre, ppreciov,pcantidad,pcveFROM productos"
+    consulta.producto.execute(sqlCOnsulta)
+    res_consulta=consulta_producto.fetchall
+
+    producto[]
+
+
+
+    return render_template('catalogo.html')
+    
 
 
 if "__main__"== __name__: 
