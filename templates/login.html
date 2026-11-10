@@ -1,29 +1,51 @@
-{%block main%}
+{% extends 'plantilla.html' %}
 
-<form action="/login" method="POST" class="container mt-5">
+{% block titulo %}
+Iniciar sesión - Florería Tuxedo
+{% endblock %}
 
-    <h2 class="text-center mb-4">Iniciar sesión</h2>
+{% block cabecera %}
+Florería Tuxedo
+{% endblock %}
 
-    <div class="mb-3">
-        <input type="text" name="lUser" class="form-control"
-        placeholder="Nombre de usuario">
-    </div>
+{% block main %}
 
-    <div class="mb-3">
-        <input type="password" name="lPass" class="form-control"
-        placeholder="Contraseña">
-    </div>
+<div class="login-container">
 
-    <button type="submit" class="btn btn-primary w-100">
-        Iniciar sesión
-    </button>
+    <div class="login-box">
 
-    {% if msj %}
-        <div class="alert alert-success mt-3">
-            {{ msj }}
+        <div class="login-header">
+            <h2>Iniciar sesión</h2>
+            <p>Ingresa tus datos para continuar</p>
         </div>
-    {% endif %}
 
-</form>
+        <form action="{{ url_for('login') }}" method="POST">
 
-{%endblock%}
+            <div class="login-field">
+                <label for="lUser">Usuario o correo</label>
+                <input type="text" id="lUser" name="lUser"
+                       placeholder="Ingresa tu usuario" required>
+            </div>
+
+            <div class="login-field">
+                <label for="lPass">Contraseña</label>
+                <input type="password" id="lPass" name="lPass"
+                       placeholder="Ingresa tu contraseña" required>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <div class="login-register">
+            <p>¿No tienes una cuenta?</p>
+            <a href="{{ url_for('registro') }}">Crear cuenta</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,88 +1,119 @@
- *{ 
-    box-sizing: border-box; 
- }
-body{
-    background-color:#EADFC6;
+/* =================================
+   CONFIGURACION GENERAL
+================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #EADFC6;
     color: rgb(50, 28, 48);
+    font-family: "Times New Roman", Times, serif;
+}
 
-}fonts {
-  font-family: "Times New Roman", Times, serif;
-}header{
+/* =================================
+   ENCABEZADO
+================================= */
+
+header {
     border: #91303F 5px solid;
-    padding-inline-start: 700px;
-    margin: 70px;
-    border-radius: 5em;
+    padding: 25px 15px;
+    margin: 20px auto;
+    border-radius: 30px;
+    width: calc(100% - 30px);
+    text-align: center;
 }
 
-#catalogo{
-    display:flex ;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
+/* =================================
+   NAVEGACION
+================================= */
 
+nav {
+    border: rgb(26, 101, 31) 2px solid;
+    width: 100%;
 }
 
-.catalogo{
-    display:flex;
-    flex-direction:column;
-    flex-wrap: wrap;
-}
-
-.producto{
+nav ul {
     display: flex;
-    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: rgb(224, 220, 106);
+    text-decoration: none;
+}
+
+/* =================================
+   CONTENIDO Y PIE DE PAGINA
+================================= */
+
+main {
+    border: palevioletred 2px solid;
+    width: 100%;
+    padding: 15px;
+}
+
+footer {
+    border: rgb(246, 221, 158) 2px solid;
+    padding: 15px;
+}
+
+/* =================================
+   CATALOGO
+================================= */
+
+#catalogo,
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 15px;
+}
+
+.producto {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: aliceblue;
     border-radius: 15px;
     gap: 10px;
-    margin: .5em;
+    margin: 5px;
     color: black;
-    padding: .5em;
-
-
+    padding: 15px;
 }
 
-.producto img{
-    width: 200px;
+.producto img {
+    width: 100%;
+    max-width: 200px;
     height: 200px;
+    object-fit: cover;
     border-radius: 8px;
 }
 
-
-
-nav {
-    border: rgb(26, 101, 31) 2px solid;
-}
-
-main{
-    border: palevioletred 2px solid;
-} 
-
-footer{
-    border: rgb(246, 221, 158) 2px solid;
-}
-
- @media only screen and (max-width: 600px){}
-    body {
-        display: flex;
-        flex-direction: column;
-    }
- 
-ul{
-    display: flex;
-    float: left;
-    
-}
-li{
-    text-decoration: none;
-}
-ul li a{
-    background-color: rgb(224, 220, 106);
-}
-/* Diseño del formulario */
+/* =================================
+   FORMULARIO DE REGISTRO
+================================= */
 
 .contenedor-formulario {
+    width: 100%;
     max-width: 600px;
     margin: 40px auto;
     padding: 30px;
@@ -96,7 +127,13 @@ ul li a{
     margin-bottom: 25px;
 }
 
+.contenedor-formulario .form-label {
+    display: block;
+    margin-top: 12px;
+}
+
 .contenedor-formulario .form-control {
+    width: 100%;
     border-radius: 10px;
     padding: 10px;
 }
@@ -118,4 +155,165 @@ ul li a{
 #rsubmit:hover {
     background-color: #9655b5;
     border-color: #9655b5;
+}
+
+/* =================================
+   INICIO DE SESION
+================================= */
+
+.login-container {
+    width: 100%;
+    min-height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 12px;
+    border: 1px solid #d9c5df;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #692f86;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+.login-field label {
+    display: block;
+    color: #692f86;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.login-field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cdb5d5;
+    border-radius: 6px;
+    outline: none;
+    font-size: 15px;
+}
+
+.login-field input:focus {
+    border-color: #692f86;
+    box-shadow: 0 0 4px rgba(105, 47, 134, 0.25);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #692f86;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: #51236b;
+}
+
+.login-register {
+    text-align: center;
+    margin-top: 25px;
+    border-top: 1px solid #e5dce9;
+    padding-top: 18px;
+}
+
+.login-register p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.login-register a {
+    color: #692f86;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-register a:hover {
+    text-decoration: underline;
+}
+
+/* =================================
+   RESPONSIVE GENERAL
+================================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+input,
+select,
+textarea,
+button {
+    max-width: 100%;
+}
+
+form {
+    width: 100%;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+@media screen and (max-width: 700px) {
+
+    header {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 20px 10px;
+    }
+
+    nav ul {
+        gap: 5px;
+    }
+
+    nav ul li a {
+        padding: 8px 10px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .contenedor-formulario {
+        padding: 20px;
+    }
+
+    .login-container {
+        padding: 20px 10px;
+    }
+
+    .login-box {
+        padding: 25px 18px;
+    }
+
 }

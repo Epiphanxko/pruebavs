@@ -1,36 +1,45 @@
-{%block titulo%}
-catalogo
-{%endblock%}
+```html
+{% extends 'plantilla.html' %}
 
-{%block main%}
-<div id= "Catalogo">
-  <div class = "card">
-  </div>
-  <div>
-    <form method="post" action=""{{}} ></form->
-    <div class="form-group">
-      <label for=""></label>
-      <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-      <small id="helpId" class="form-text text-muted">Help text</small>
-    </div>
-    <button type="buscar" class="btn btn-primary">Buscar</button>
-  </div>
-        <div>
-            <div>
+{% block titulo %}
+Catálogo
+{% endblock %}
 
+{% block cabecera %}
+Catálogo de productos
+{% endblock %}
+
+{% block main %}
+
+<div id="catalogo">
+
+    <div>
+        <form method="GET" action="{{ url_for('catalogo') }}">
+            <div class="form-group">
+                <input type="text"
+                       class="form-control"
+                       name="buscar"
+                       placeholder="Buscar producto...">
             </div>
-            <h2>
-                Titutlo del producto 
-            </h2>
 
-            <img src ="#" alt="Imagen del producto" >
-            <p>$o.oo</p>
-            <a href ="#"> </a>
-        </div>
+            <button type="submit" class="btn btn-primary">
+                Buscar
+            </button>
+        </form>
+    </div>
 
+    <div class="producto">
+        <h2>Título del producto</h2>
 
+        <img src="{{ url_for('static', filename='img/producto.jpg') }}"
+             alt="Imagen del producto">
 
+        <p>$0.00</p>
 
-
+        <a href="#">Ver producto</a>
+    </div>
 
 </div>
+
+{% endblock %}
+```

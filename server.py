@@ -1,8 +1,8 @@
-from flask import Flask, render_template, url_for, request,flash, redirect
+from flask import Flask, render_template, url_for, request,flash, redirect, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, PasswordField, SubmitField,BooleanField
 from wtforms.validators import Email, Length, EqualTo, DataRequired,InputRequired
-
+from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from config_server import Config
@@ -13,21 +13,32 @@ app= Flask(__name__)
 
 app.config.from_object(Config)
 
-app.secret_key = "floreria123"
-
+print("SECRET_KEY:", bool(app.config.get("SECRET_KEY")))
 
 database = MySQL(app)
+
+
+#Funcion para calidar si hay secion iniciada 
+
+def validarSecion(f):
+    @wraps(f)
+    def funcion_decoradora(*args, **kwargs):
+        if 'nameUser' not in session:
+            flash("DEBES INICIAR SECION PARA PODER ACCEDER A ESTA PAGINA", "info")
+            return redirect(url_for('login'))
+
+        return f(*args, **kwargs)
+    return funcion_decoradora
 
 
 
 
 
 #rutas
-@app.route("/") 
-def index(): 
-    flash ("Bienvenido","alerta")
-    return(render_template("index.html")) 
-
+@app.route("/")
+def index():
+    flash("Bienvenido", "info")
+    return render_template("index.html")
 class Registro(FlaskForm):
     rNombre = StringField("Nombre", validators=[Length(min=3, max=50, message="Ingresa un nombre valido")])
     rApellido = StringField("Apellidos",validators=[InputRequired(), Length(min=1,max=150)])
@@ -64,9 +75,8 @@ def registro():
             database.connection.commit() 
             crearUsuario.close()
 
-            flash("Cuenta creada", "succes")
-
-            return redirect("login")
+            flash("Cuenta creada", "success")
+            return redirect(url_for("login"))
 
     return render_template('formulario.html', form=form)
 
@@ -85,6 +95,7 @@ def login():
     return render_template('login.html',msj =msj)
 
 @app.route('/perfil')
+@validarSecion
 def perfil():
     consulta_perfil = database.connection.cursor()
 
@@ -113,19 +124,18 @@ def perfil():
 
 #CATALOGO
 
-@app.route('/catalogo', methods=['POST'])
+@app.route('/catalogo', methods=['GET', 'POST'])
 def catalogo():
     consulta_producto = database.connection.cursor()
-    sqlCOnsulta = "SELECT pnombre, ppreciov,pcantidad,pcveFROM productos"
-    consulta.producto.execute(sqlCOnsulta)
-    res_consulta=consulta_producto.fetchall
+    sqlConsulta = "SELECT pnombre, ppreciov, pcantidad, pcve FROM productos"
 
-    producto[]
+    consulta_producto.execute(sqlConsulta)
 
+    res_consulta = consulta_producto.fetchall()
 
+    consulta_producto.close()
 
-    return render_template('catalogo.html')
-    
+    return render_template('catalogo.html', productos=res_consulta)
 
 
 if "__main__"== __name__: 

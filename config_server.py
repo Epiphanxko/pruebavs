@@ -10,7 +10,7 @@ load_dotenv(dotenv_path=BASE_DIR /".env")
 
 class Config:
 
-    SECRET_KEY=os.getenv("API_KEY")
+    SECRET_KEY = os.getenv("APP_KEY")
 
     MYSQL_HOST = os.getenv("MYSQL_HOST")
     MYSQL_USER =os.getenv("MYSQL_USER")

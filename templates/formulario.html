@@ -1,105 +1,100 @@
 
+{% block cabecera %}
 
-{% block cabecera %} 
+Formulario de registro
 
-formulario de registro 
-
-{% endblock %} 
+{% endblock %}
 
 {% block main %}
 <section>
     <div class="contenedor-formulario">
 
         <h2>🌸 Formulario de registro</h2>
-        
+
         <form action="{{ url_for('registro') }}" method="POST">
-            {{form.hidden_tag() }}
-            {{form.rNombre.label(class="form-label")}}
-            {{form.rNombre(class="form-control")}}
-            {%if form.rNombre.errors%}
-              <div class="text-danger">
-                {%for errors in form.rNombre.errors%}
-                <small>{{errors}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%}
+            {{ form.hidden_tag() }}
 
-            {{form.rApellido.label(class="form-label")}}
-            {{form.rApellido(class="form-control")}}
-            {%if form.rApellido.errors%}
-              <div class="text-danger">
-                {%for errors in form.rApellido.errors%}
-                <small>{{error}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%}
+            {{ form.rNombre.label(class="form-label") }}
+            {{ form.rNombre(class="form-control") }}
+            {% if form.rNombre.errors %}
+                <div class="text-danger">
+                    {% for error in form.rNombre.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-            {{form.rCorreo.label(class="form-label")}}
-            {{form.rCorreo(class="form-control")}}
-            {%if form.rCorreo.errors%}
-              <div class="text-danger">
-                {%for errors in form.rCorreo.errors%}
-                <small>{{error}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%}
+            {{ form.rApellido.label(class="form-label") }}
+            {{ form.rApellido(class="form-control") }}
+            {% if form.rApellido.errors %}
+                <div class="text-danger">
+                    {% for error in form.rApellido.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
+            {{ form.rCorreo.label(class="form-label") }}
+            {{ form.rCorreo(class="form-control") }}
+            {% if form.rCorreo.errors %}
+                <div class="text-danger">
+                    {% for error in form.rCorreo.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-            {{form.rPass.label(class="form-label")}}
-            {{form.rPass(class="form-control")}}
-            {%if form.rPass.errors%}
-              <div class="text-danger">
-                {%for errors in form.rPass.errors%}
-                <small>{{error}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%} 
+            {{ form.rPass.label(class="form-label") }}
+            {{ form.rPass(class="form-control") }}
+            {% if form.rPass.errors %}
+                <div class="text-danger">
+                    {% for error in form.rPass.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-
-            {{form.rConfirm.label(class="form-label")}}
-            {{form.rConfirm(class="form-control")}}
-            {%if form.rConfirm.errors%}
-              <div class="text-danger">
-                {%for errors in form.rConfirm.errors%}
-                <small>{{errors}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%}
-            <br>
-
-            {{form.rTYC.label(class="form-check-label")}}
-            {{form.rTYC(id= "rTYC",class="form-check-input")}}
-            {%if form.rTYC.errors%}
-              <div class="text-danger">
-                {%for errors in form.rTYC.errors%}
-                <small>{{error}}</small>
-                {%endfor%}
-              </div>  
-            {%endif%}
+            {{ form.rConfirm.label(class="form-label") }}
+            {{ form.rConfirm(class="form-control") }}
+            {% if form.rConfirm.errors %}
+                <div class="text-danger">
+                    {% for error in form.rConfirm.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
             <br>
 
-            
-            {{form.rsubmit(id="rsubmit",class= "btn btn-primary", disabled=true)}}
-            <a href="{{url_for('index')}}" class="btn btn-primary">Cancelar</a>
+            {{ form.rTYC.label(class="form-check-label") }}
+            {{ form.rTYC(id="rTYC", class="form-check-input") }}
+            {% if form.rTYC.errors %}
+                <div class="text-danger">
+                    {% for error in form.rTYC.errors %}
+                        <small>{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <br>
+
+            {{ form.rsubmit(id="rsubmit", class="btn btn-primary", disabled=true) }}
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Cancelar</a>
 
         </form>
+
         <script>
+            const checkbox = document.getElementById("rTYC");
+            const btnsubmit = document.getElementById("rsubmit");
 
-          const checkbox = document.getElementById("rTYC");
-          const btnsubmit = document.getElementById("rsubmit");
-
-          checkbox.addEventListener("change", function(){
-
-          btnsubmit.disabled= !this.checked;
-          });
-          
-
-
-
+            checkbox.addEventListener("change", function() {
+                btnsubmit.disabled = !this.checked;
+            });
         </script>
-        </div>
+
+    </div>
 </section>
+
 <section>
     DUDAS
 </section>

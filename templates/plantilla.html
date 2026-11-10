@@ -42,23 +42,26 @@
             {%endif%}
             {% endwith%}
         </div>
-        <ul>
-            
-            <li>
-                <a href="{{url_for()    }}">Home</a>
-            </li>
-            <li>
-                <a href="/formulario">INICIAR SECION</a>
-            </li>
-            <li>
-                <a href="/login">CREAR CUENTA</a>
-            </li>
-            <li>
-                <a href="/acercade">MUESTRARIO</a>
-            </li>
-            <li>
-                <a href="/perfil">PERFIL</a>
-            </li>
+       <ul>
+    <li>
+        <a href="{{ url_for('index') }}">Home</a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('registro') }}">INICIAR SESIÓN</a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('login') }}">CREAR CUENTA</a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('catalogo') }}">MUESTRARIO</a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('perfil') }}">PERFIL</a>
+    </li>
         </ul>
         <p>
         </p>
