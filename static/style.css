@@ -2,7 +2,7 @@
    CONFIGURACION GENERAL
 ================================= */
 
-* {
+* { 
     box-sizing: border-box;
 }
 
@@ -56,7 +56,7 @@ nav ul {
 nav ul li a {
     display: block;
     padding: 10px 15px;
-    background-color: rgb(224, 220, 106);
+    background-color: rgb(174, 68, 68);
     text-decoration: none;
 }
 
@@ -71,7 +71,7 @@ main {
 }
 
 footer {
-    border: rgb(246, 221, 158) 2px solid;
+    border: rgb(239, 212, 142) 2px solid;
     padding: 15px;
 }
 

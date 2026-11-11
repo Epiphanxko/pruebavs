@@ -127,7 +127,7 @@ def perfil():
 @app.route('/catalogo', methods=['GET', 'POST'])
 def catalogo():
     consulta_producto = database.connection.cursor()
-    sqlConsulta = "SELECT pnombre, ppreciov, pcantidad, pcve FROM productos"
+    sqlConsulta = "SELECT pnombre, ppreciov, pcantidad, pcve FROM producto"
 
     consulta_producto.execute(sqlConsulta)
 
