@@ -17,9 +17,6 @@ print("SECRET_KEY:", bool(app.config.get("SECRET_KEY")))
 
 database = MySQL(app)
 
-
-#Funcion para calidar si hay secion iniciada 
-
 def validarSecion(f):
     @wraps(f)
     def funcion_decoradora(*args, **kwargs):
@@ -29,10 +26,6 @@ def validarSecion(f):
 
         return f(*args, **kwargs)
     return funcion_decoradora
-
-
-
-
 
 #rutas
 @app.route("/")
@@ -68,7 +61,7 @@ def registro():
        if inPass == inConfirm and inTYC != False:
             password_hasheada= generate_password_hash(inPass)
 
-            sqlCrearUsuario = "INSERT INTO usuarios(id_usuario,name_user,email_user) VALUES (%s,%s,%s)"
+            sqlCrearUsuario = "INSERT INTO usuarios(name_user,email_user,pass_user) VALUES (%s,%s,%s)"
 
             crearUsuario = database.connection.cursor()
             crearUsuario.execute(sqlCrearUsuario,(inNombre,inCorreo,password_hasheada))
@@ -85,14 +78,37 @@ def login():
     msj= None
 
     if request.method == 'POST':
-        lUser =request.form.get("lUser")
-        lPass =request.form.get("lPass")
+        logUser =request.form.get("lUser")
+        logPass =request.form.get("lPass")
 
-        msj = f"NOMBRE: {lUser},CONTRASEÑA: {"lPass"}"
+        if logUser and logPass:
 
-        return render_template('login.html',msj =msj)
+            loginSQL="SELECT name_user,email_user,pass_user FROM usuarios WHERE email_user = %s"
 
-    return render_template('login.html',msj =msj)
+            loginCon = database.connection.cursor()
+            loginCon.execute(loginSQL,(logUser,))
+            resLogin = loginCon.fetchone()
+
+            if resLogin:
+                passDB = resLogin[2]
+
+                if check_password_hash(passDB, logPass):
+                    session['nameUser'] = resLogin[0]
+                    session['emailUser'] = resLogin[1]
+
+                    flash("Bienvenido","sucess")
+                    return redirect(url_for('perfil'))
+
+                else:
+                    flash("Usuario o Contraseña incorrectos", "warning")
+
+        else:
+            flash("INgrese los datos completos")
+
+            return render_template('loogin.html',msj=msj)
+
+    return render_template('login.html',msj=msj)                
+
 
 @app.route('/perfil')
 @validarSecion
@@ -122,7 +138,6 @@ def perfil():
 
     return render_template('perfil.html', usuarios=usuarios)
 
-#CATALOGO
 
 @app.route('/catalogo', methods=['GET', 'POST'])
 def catalogo():
@@ -139,4 +154,4 @@ def catalogo():
 
 
 if "__main__"== __name__: 
-    app.run(host="0.0.0.0", port=8088, debug=True) 
+    app.run(host="0.0.0.0", port=3000, debug=True) 
